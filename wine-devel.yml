@@ -110,6 +110,7 @@ AppDir:
 
      WINE_VER="$(curl -s https://api.github.com/repos/starcitizen-lug/lug-wine-experimental/releases/latest | grep -Eo "\"browser_download_url\": ?\"[^\"]+\"" | grep -vie "staging" | cut -d '"' -f4 | xargs basename)"
 
+     echo "trying to download https://github.com/starcitizen-lug/lug-wine-experimental/releases/download/latest/${WINE_VER}"
      wget -q "https://github.com/starcitizen-lug/lug-wine-experimental/releases/download/latest/${WINE_VER}"
      mkdir -p AppDir/opt ; (cd AppDir/opt ; tar -xf ../../*.tar.xz ; mv lug-wine-* wine-devel)
 
