@@ -81,7 +81,7 @@ jobs:
 
           # devel
           WINE_VER="$(curl -s https://api.github.com/repos/starcitizen-lug/lug-wine-experimental/releases/latest | grep -Eo "\"browser_download_url\": ?\"[^\"]+\"" | grep -vie "staging" | cut -d '"' -f4 | xargs basename)"
-          echo "${WINE_VER%.tar.gz}" >> $GITHUB_ENV
+          echo "WINE_VER=${WINE_VER%.tar.gz}" >> $GITHUB_ENV
 
       # Runs a set of commands using the runners shell
       - name: Build appimage
