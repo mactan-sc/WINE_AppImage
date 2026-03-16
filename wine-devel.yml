@@ -109,7 +109,7 @@ AppDir:
      sed -i 's|wine-appimage|wine-appimage-devel|' AppDir/wrapper
 
      wget -q "https://github.com/starcitizen-lug/lug-wine-experimental/releases/download/11.4-1/lug-wine-tkg-staging-experimental-wayland-git-11.4-1.tar.gz"
-     mkdir -p AppDir/opt ; (cd AppDir/opt ; tar -xf ../../*.tar.xz ; mv lug-wine-* wine-devel)
+     mkdir -p AppDir/opt ; (cd AppDir/opt ; tar -xf ../../*.tar.gz ; mv lug-wine-* wine-devel)
 
      (cd AppDir/usr/bin; ln -s "../../opt/wine-devel/bin/"* .)
 
