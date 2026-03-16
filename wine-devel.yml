@@ -37,6 +37,7 @@ AppDir:
     include:
       - bash
       - cabextract
+      - unzip
       - dash
       - coreutils
       - mesa-utils
@@ -107,10 +108,10 @@ AppDir:
      # Patch wrapper script
      sed -i 's|wine-appimage|wine-appimage-devel|' AppDir/wrapper
 
-     WINE_VER="$(wget -qO- https://github.com/mmtrt/Wine-Builds/releases/expanded_assets/latest | grep -Eo '[0-9].*xz"' | sed -r 's|-amd64| |' | head -1 | awk '{print $1}')"
+     WINE_VER="$(curl -s https://api.github.com/repos/starcitizen-lug/lug-wine-experimental/releases/latest | grep -Eo "\"browser_download_url\": ?\"[^\"]+\"" | grep -vie "staging" | cut -d '"' -f4 | xargs basename)"
 
-     wget -q "https://github.com/mmtrt/Wine-Builds/releases/download/latest/wine-${WINE_VER}-amd64.tar.xz"
-     mkdir -p AppDir/opt ; (cd AppDir/opt ; tar -xf ../../*.tar.xz ; mv wine-* wine-devel)
+     wget -q "https://github.com/starcitizen-lug/lug-wine-experimental/releases/download/latest/${WINE_VER}"
+     mkdir -p AppDir/opt ; (cd AppDir/opt ; tar -xf ../../*.tar.xz ; mv lug-wine-* wine-devel)
 
      (cd AppDir/usr/bin; ln -s "../../opt/wine-devel/bin/"* .)
 
@@ -130,7 +131,7 @@ AppDir:
     - /opt/wine-devel:$APPDIR/opt/wine-devel
 
 AppImage:
-  update-information: gh-releases-zsync|mmtrt|WINE_AppImage|continuous-devel|wine-devel*.AppImage.zsync
+  update-information: gh-releases-zsync|mactan-sc|WINE_AppImage|continuous-devel|wine-devel*.AppImage.zsync
   #sign-key: None
   arch: x86_64
 
